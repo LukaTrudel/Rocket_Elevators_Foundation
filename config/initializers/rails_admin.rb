@@ -3,6 +3,18 @@ RailsAdmin.config do |config|
   config.authorize_with do
     redirect_to main_app.root_path unless user_signed_in?
   end
+
+  def index(user_id)
+    #create new skeleton item
+    @item = User.new
+
+    @pagy, @items = pagy User.accounts(user_id).by_term(items_params[:term]).sorted_by(items_params[:sort])
+
+    #check results
+  rescue Exceptions::Users => e
+    report_exception e, Entities::User + Actions::INDEX
+  end
+
   ### Popular gems integration
 
   ## == Devise ==

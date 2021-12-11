@@ -6,4 +6,8 @@ class User < ApplicationRecord
   has_one :employee
 
   encrypts :email
+
+  blind_index :email
+
+  
 end
