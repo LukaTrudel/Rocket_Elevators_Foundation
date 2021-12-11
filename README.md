@@ -107,7 +107,7 @@ https://github.com/LukaTrudel/Rocket_Elevators_REST_API
 
 For week 10 we had to implement our own tests inside the information system.  
 
-To execute the tests simply run: bundle exec rspec
+To execute the tests simply run: bundle exec rspec <br>
 or specify the routing of the the specific test you wish to run.
 
 
