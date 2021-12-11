@@ -122,3 +122,8 @@ gem 'ed25519'
 gem 'bcrypt_pbkdf'
 
 gem 'quotify'
+
+gem 'authtrail'
+gem 'lockbox'
+gem 'blind_index'
+gem 'rails-letsencrypt'

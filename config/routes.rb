@@ -21,6 +21,8 @@ Rails.application.routes.draw do
   post '/contact', to: 'contact#create'
 
   post '/interventions', to: 'interventions#create'
+
+  mount LetsEncrypt::Engine => '/.well-known'
   # post '/leads', to: 'leads#create'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

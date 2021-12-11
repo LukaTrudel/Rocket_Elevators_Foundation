@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_02_084029) do
+ActiveRecord::Schema.define(version: 2021_12_10_212135) do
 
   create_table "addresses", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
     t.string "typeAddress", null: false
@@ -22,8 +22,6 @@ ActiveRecord::Schema.define(version: 2021_12_02_084029) do
     t.string "postalCode", null: false
     t.string "country", null: false
     t.string "notes", null: false
-    t.float "lat", null: false
-    t.float "long", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -163,6 +161,46 @@ ActiveRecord::Schema.define(version: 2021_12_02_084029) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "letsencrypt_certificates", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+    t.string "domain"
+    t.text "certificate"
+    t.text "intermediaries"
+    t.text "key"
+    t.datetime "expires_at"
+    t.datetime "renew_after"
+    t.string "verification_path"
+    t.string "verification_string"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["domain"], name: "index_letsencrypt_certificates_on_domain"
+    t.index ["renew_after"], name: "index_letsencrypt_certificates_on_renew_after"
+  end
+
+  create_table "login_activities", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
+    t.string "scope"
+    t.string "strategy"
+    t.text "identity_ciphertext"
+    t.string "identity_bidx"
+    t.boolean "success"
+    t.string "failure_reason"
+    t.string "user_type"
+    t.bigint "user_id"
+    t.string "context"
+    t.text "ip_ciphertext"
+    t.string "ip_bidx"
+    t.text "user_agent"
+    t.text "referrer"
+    t.string "city"
+    t.string "region"
+    t.string "country"
+    t.float "latitude"
+    t.float "longitude"
+    t.datetime "created_at"
+    t.index ["identity_bidx"], name: "index_login_activities_on_identity_bidx"
+    t.index ["ip_bidx"], name: "index_login_activities_on_ip_bidx"
+    t.index ["user_type", "user_id"], name: "index_login_activities_on_user_type_and_user_id"
+  end
+
   create_table "quotes", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
     t.string "type_building", null: false
     t.integer "numApartment"
@@ -171,10 +209,6 @@ ActiveRecord::Schema.define(version: 2021_12_02_084029) do
     t.integer "numOccupant"
     t.string "compagnyName"
     t.string "email"
-    t.string "typeService"
-    t.decimal "totalElevatorPrice", precision: 10
-    t.decimal "total", precision: 10
-    t.decimal "installationFees", precision: 10
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

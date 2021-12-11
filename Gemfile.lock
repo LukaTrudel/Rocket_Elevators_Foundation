@@ -14,6 +14,8 @@ GIT
 GEM
   remote: https://rubygems.org/
   specs:
+    acme-client (2.0.9)
+      faraday (>= 0.17, < 2.0.0)
     actioncable (5.2.6)
       actionpack (= 5.2.6)
       nio4r (~> 2.0)
@@ -66,6 +68,7 @@ GEM
     archive-zip (0.12.0)
       io-like (~> 0.3.0)
     arel (9.0.0)
+    argon2-kdf (0.1.6)
     async (1.30.1)
       console (~> 1.10)
       nio4r (~> 2.3)
@@ -75,11 +78,18 @@ GEM
     async-websocket (0.8.0)
       async-io
       websocket-driver (~> 0.7.0)
+    authtrail (0.4.1)
+      activerecord (>= 5.2)
+      railties (>= 5.2)
+      warden
     autoprefixer-rails (10.3.3.0)
       execjs (~> 2)
     bcrypt (3.1.16)
     bcrypt_pbkdf (1.1.0)
     bindex (0.8.1)
+    blind_index (2.2.0)
+      activesupport (>= 5)
+      argon2-kdf (>= 0.1.1)
     bootsnap (1.9.1)
       msgpack (~> 1.0)
     bootstrap (4.4.1)
@@ -240,6 +250,7 @@ GEM
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
       ruby_dep (~> 1.2)
+    lockbox (0.6.6)
     loofah (2.12.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
@@ -308,6 +319,10 @@ GEM
       nokogiri (>= 1.6)
     rails-html-sanitizer (1.4.2)
       loofah (~> 2.3)
+    rails-letsencrypt (0.10.1)
+      acme-client (~> 2.0.0)
+      rails (>= 5.0)
+      redis
     rails-ujs (0.1.0)
       railties (>= 3.1)
     rails_admin (2.2.1)
@@ -332,6 +347,7 @@ GEM
     rb-fsevent (0.11.0)
     rb-inotify (0.10.1)
       ffi (~> 1.0)
+    redis (4.5.1)
     regexp_parser (2.1.1)
     remotipart (1.4.4)
     responders (3.0.1)
@@ -453,7 +469,9 @@ PLATFORMS
 
 DEPENDENCIES
   async-websocket (~> 0.8.0)
+  authtrail
   bcrypt_pbkdf
+  blind_index
   bootsnap (>= 1.1.0)
   bootstrap (~> 4.4.1)
   bootstrap-social-rails
@@ -480,12 +498,14 @@ DEPENDENCIES
   jquery-rails
   jquery-ui-rails
   listen (>= 3.0.5, < 3.2)
+  lockbox
   mysql2 (>= 0.4.4, < 0.6.0)
   owlcarousel-rails
   pg
   puma (~> 3.11)
   quotify
   rails (~> 5.2.6)
+  rails-letsencrypt
   rails-ujs (~> 0.1.0)
   rails_admin (~> 2.0)
   rspec-rails (~> 5.0.0)
